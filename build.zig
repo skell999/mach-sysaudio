@@ -4,15 +4,9 @@ pub fn build(b: *std.Build) void {
     const optimize = b.standardOptimizeOption(.{});
     const target = b.standardTargetOptions(.{});
 
-    const mach_sysjs_dep = b.dependency("mach_sysjs", .{
-        .target = target,
-        .optimize = optimize,
-    });
     const module = b.addModule("mach-sysaudio", .{
         .source_file = .{ .path = sdkPath("/src/main.zig") },
-        .dependencies = &.{
-            .{ .name = "sysjs", .module = mach_sysjs_dep.module("mach-sysjs") },
-        },
+        .dependencies = &.{},
     });
 
     const main_tests = b.addTest(.{

@@ -96,7 +96,7 @@ pub const Context = struct {
 
         _ = lib.snd_lib_error_set_handler(@as(c.snd_lib_error_handler_t, @ptrCast(&util.doNothing)));
 
-        var ctx = try allocator.create(Context);
+        const ctx = try allocator.create(Context);
         errdefer allocator.destroy(ctx);
         ctx.* = .{
             .allocator = allocator,
@@ -323,7 +323,7 @@ pub const Context = struct {
 
                             if (chmap[0] == null) continue;
 
-                            var channels = try ctx.allocator.alloc(main.ChannelPosition, chmap.*.*.map.channels);
+                            const channels = try ctx.allocator.alloc(main.ChannelPosition, chmap.*.*.map.channels);
                             for (channels, 0..) |*ch, i|
                                 ch.* = fromAlsaChannel(chmap[0][0].map.pos()[i]) catch return error.OpeningDevice;
                             break :blk channels;
@@ -483,7 +483,7 @@ pub const Context = struct {
         var period_size: c_ulong = 0;
         try ctx.createStream(device, format, sample_rate, &pcm, &mixer, &selem, &mixer_elm, &period_size);
 
-        var player = try ctx.allocator.create(Player);
+        const player = try ctx.allocator.create(Player);
         player.* = .{
             .allocator = ctx.allocator,
             .thread = undefined,
@@ -513,7 +513,7 @@ pub const Context = struct {
         var period_size: c_ulong = 0;
         try ctx.createStream(device, format, sample_rate, &pcm, &mixer, &selem, &mixer_elm, &period_size);
 
-        var recorder = try ctx.allocator.create(Recorder);
+        const recorder = try ctx.allocator.create(Recorder);
         recorder.* = .{
             .allocator = ctx.allocator,
             .thread = undefined,

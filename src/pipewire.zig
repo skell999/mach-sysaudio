@@ -82,7 +82,7 @@ pub const Context = struct {
 
         lib.pw_init(null, null);
 
-        var ctx = try allocator.create(Context);
+        const ctx = try allocator.create(Context);
         errdefer allocator.destroy(ctx);
         ctx.* = .{
             .allocator = allocator,
@@ -196,7 +196,7 @@ pub const Context = struct {
             .trigger_done = null,
         };
 
-        var player = try ctx.allocator.create(Player);
+        const player = try ctx.allocator.create(Player);
         errdefer ctx.allocator.destroy(player);
 
         const thread = lib.pw_thread_loop_new(device.id, null) orelse return error.SystemResources;
@@ -301,7 +301,7 @@ pub const Context = struct {
             .trigger_done = null,
         };
 
-        var recorder = try ctx.allocator.create(Recorder);
+        const recorder = try ctx.allocator.create(Recorder);
         errdefer ctx.allocator.destroy(recorder);
 
         const thread = lib.pw_thread_loop_new(device.id, null) orelse return error.SystemResources;
@@ -365,7 +365,7 @@ fn stateChangedCb(player_opaque: ?*anyopaque, old_state: c.pw_stream_state, stat
     _ = old_state;
     _ = err;
 
-    var player = @as(*Player, @ptrCast(@alignCast(player_opaque.?)));
+    const player = @as(*Player, @ptrCast(@alignCast(player_opaque.?)));
 
     if (state == c.PW_STREAM_STATE_STREAMING or state == c.PW_STREAM_STATE_ERROR) {
         lib.pw_thread_loop_signal(player.thread, false);

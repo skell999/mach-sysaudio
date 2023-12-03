@@ -12,10 +12,6 @@
         "README.md",
     },
     .dependencies = .{
-        .mach_sysjs = .{
-            .url = "https://pkg.machengine.org/mach-sysjs/bafd6c9b8fd5e7be1e8e24cfbd156703d6026aa8.tar.gz",
-            .hash = "1220187935c4c5d4cf824927df28e858dcd06cb864bb5d6be4cd349d2836abb4aec4",
-        },
         .linux_audio_headers = .{
             .url = "https://pkg.machengine.org/linux-audio-headers/6b182ff9d51009ca903f3bac63777fbfa654e5f5.tar.gz",
             .hash = "122052c4415f4d5be98e3324083939af644d5f8eddd2e6a1a544596645eda8cf411a",
